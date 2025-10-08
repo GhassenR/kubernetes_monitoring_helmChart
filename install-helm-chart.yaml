@@ -1,0 +1,11 @@
+---
+- hosts: master
+  user: root
+  name: Install Helm chart
+  tasks:
+     - name :  Install helm chart
+       shell:  curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+     - name :  Add permission to helm chart 
+       shell: chmod 700 get_helm.sh
+     - name :  Start Helm chart
+       shell : ./get_helm.sh

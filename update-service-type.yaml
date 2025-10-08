@@ -1,0 +1,17 @@
+---
+- name: update type service from ClusterIP to NodePort
+  hosts: master
+  user: root
+  
+  tasks:
+
+    - name: create folder named monitoring 
+      command: mkdir -p /home/monitoring
+
+    - name: copy value
+      copy:
+        src: values.yaml
+        dest: /home/monitoring
+        
+    - name: update type service from ClusterIP to NodePort
+      shell: helm upgrade monitoring prometheus-community/kube-prometheus-stack --values /home/monitoring/values.yaml -n monitoring

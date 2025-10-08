@@ -1,0 +1,20 @@
+---
+- name: Install Grafana and Prometheus
+  hosts: master
+  user: root
+  
+  tasks:
+
+    - name: Add repo prometheus using helm chart 
+      command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+    - name: update repo using helm chart 
+      command: helm repo update
+
+    - name: Create namespace monitoring
+      shell: kubectl create namespace monitoring
+
+    - name: install monitoring using helm chart 
+      command: helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring
+
+    
